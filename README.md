@@ -4,3 +4,8 @@
 相机内参标定的结果有些奇怪，畸变系数比较大，但重投影误差很小。
 发现了手眼标定的AX=ZB问题，完全符合我的需求，对应cv2库里的 calibrateRobotWorldHandEye。先马一下，明天来看。
 https://robotics.stackexchange.com/questions/20437/understanding-types-of-hand-eye-calibration
+
+### 2025.03.09
+1，优化了solvepnp的结果，测量了棋盘格中心和tcp之间的位置关系，测试结果好多了，但依然有误差，猜测是solvepnp只计算一张照片，结果不够泛化，决定尝试一下手眼标定。
+2， 我的场景属于手眼标定中的eye to hand情景。我要求的是相机相对于机器人底座（是world也是base）的坐标，属于AX=XB问题，使用cv库里的calibrateHandEye即可。其中x指相机在base里的表示，A是机械臂末端相对于base，B是棋盘格点相对于相机（由solvepnp得出）。
+3， 参考gpt和这个帖子的代码：https://forum.opencv.org/t/eye-to-hand-calibration/5690/2
