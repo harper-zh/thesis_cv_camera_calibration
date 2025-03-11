@@ -9,3 +9,7 @@ https://robotics.stackexchange.com/questions/20437/understanding-types-of-hand-e
 1，优化了solvepnp的结果，测量了棋盘格中心和tcp之间的位置关系，测试结果好多了，但依然有误差，猜测是solvepnp只计算一张照片，结果不够泛化，决定尝试一下手眼标定。
 2， 我的场景属于手眼标定中的eye to hand情景。我要求的是相机相对于机器人底座（是world也是base）的坐标，属于AX=XB问题，使用cv库里的calibrateHandEye即可。其中x指相机在base里的表示，A是机械臂末端相对于base，B是棋盘格点相对于相机（由solvepnp得出）。
 3， 参考gpt和这个帖子的代码：https://forum.opencv.org/t/eye-to-hand-calibration/5690/2
+
+### 2025.03.11
+solvepnp算法使用四张图片算出的结果全部都不同，并且都偏到了姥姥家。
+手眼标定法得到了一个新结果，待明天尝试验证。
