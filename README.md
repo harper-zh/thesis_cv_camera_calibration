@@ -13,3 +13,6 @@ https://robotics.stackexchange.com/questions/20437/understanding-types-of-hand-e
 ### 2025.03.11
 solvepnp算法使用四张图片算出的结果全部都不同，并且都偏到了姥姥家。
 手眼标定法得到了一个新结果，待明天尝试验证。
+
+### 2025.03.14
+更换了棋盘格照片。重新整理过代码，目前计算结果仍有误差。pnp解决的是单张照片的位姿求解，下一步是利用全局调整优化相机位姿。不再使用eye to hand方法了。
