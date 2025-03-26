@@ -1,0 +1,11 @@
+src/**/chessboard_corner/
+src/**/draw_corner/
+src/**/exif_img/
+src/**/hdr/
+src/**/hdr_new/
+src/**/image4calib/
+src/**/image4pnp/
+src/**/image4test/
+src/**/images/
+src/**/pre/
+src/**/warped_img/

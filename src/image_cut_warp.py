@@ -1,6 +1,7 @@
 import numpy as np
 import cv2
 
+
 def warp_perspective(image, pts_src, output_size):
     """
     对四边形区域进行透视变换，使其变成正方形。
@@ -14,17 +15,14 @@ def warp_perspective(image, pts_src, output_size):
     - warped_img: 透视变换后的正方形图像
     - M: 变换矩阵 (用于逆变换)
     """
-    # 定义正方形目标点 (右上、左上、左下、右下)
-    pts_dst = np.array([
-        [output_size[0] - 1, 0], 
-        [0, 0], 
-        [0, output_size[1] - 1],
-        [output_size[0] - 1, output_size[1] - 1]
-        
-    ], dtype=np.float32)
+    # 定义正方形目标点 (左上、右上、右下左下)
+    pts_dst = np.array([[0, 0],[output_size[0] - 1, 0],[output_size[0] - 1, output_size[1] - 1],[0, output_size[1] - 1],
+                        ],
+                       dtype=np.float32)
 
     # 计算透视变换矩阵
-    M = cv2.getPerspectiveTransform(np.array(pts_src, dtype=np.float32), pts_dst)
+    M = cv2.getPerspectiveTransform(np.array(pts_src, dtype=np.float32),
+                                    pts_dst)
 
     # 进行透视变换
     warped_img = cv2.warpPerspective(image, M, output_size)

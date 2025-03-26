@@ -63,9 +63,7 @@ def cam_calib(w, h, square_size, criteria, path,outpath):
 
     # 相机标定
     print("\nStarting camera calibration...")
-    # ret, camera_matrix, distortion_coeffs, rvecs, tvecs = cv2.calibrateCamera(
-    #     objpoints, imgpoints, grays[0].shape[::-1], None, None
-    # )
+
     ret, camera_matrix, distortion_coeffs, rvecs, tvecs = cv2.calibrateCamera(
         objpoints,
         imgpoints,

@@ -1,6 +1,7 @@
 import itertools
 import numpy as np
 from scipy.spatial.transform import Rotation as R
+from data_manager import DataManager 
 
 euler = np.array([-20,-10,0,10,20])
 #欧拉角组合
@@ -21,7 +22,7 @@ grid_flatten = grid_3d.reshape(-1, 3)
 reverse_grid = grid_flatten[::-1]
 # print(reverse_grid)
 
-#旋转矩阵
+#从欧拉角到变换矩阵
 rotations = [
     R.from_euler('zyx', angles, degrees=True) for angles in euler_combos
 ]
@@ -40,8 +41,16 @@ for rotation in rotations:
     for g in translation:
         T[:3, 3] = g
         T_list.append(T)
-print(len(T_list))
+# print(len(T_list))
 
+#筛选出和数据库里编号一致的变换矩阵
+idx = [51,126,722,1414,2203]
+filtered_list = [item for i, item in enumerate(T_list) if i not in idx]#把没拍上照片的去掉
+
+data = DataManager.load("data.pkl")
+indexs = data.pixel_coords.keys()
+T_list_final = [filtered_list[int(idx)] for idx in indexs]#根据存取数据的id，选取成功识别了像素点的位置，
+print(len(T_list_final))
 
 def object_points_calculate(T_ref, T_pose, point_board):
     """
